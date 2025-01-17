@@ -4,40 +4,7 @@
     <div class="container-fluid bg-white">
       <form [formGroup]="categoryForm" class="w-100">
         <div class="row">
-          <div *ngIf="!patchId" class="col-12 mb-3 mt-4">
-            <label for="formFile" class="form-label"
-              >Choose File <span class="text-danger">*</span></label
-            >
-            <input
-              class="form-control"
-              type="file"
-              formControlName="zipFile"
-              (change)="onFileChange($event)"
-              accept=".rar,.zip"
-              [disabled]="disabled"
-            />
-
-            <!-- Validation Message for File -->
-            <div
-              *ngIf="
-                categoryForm.get('zipFile')?.invalid &&
-                categoryForm.get('zipFile')?.touched &&
-                !patchId
-              "
-              class="text-danger"
-            >
-              Please upload a valid .rar or .zip file.
-            </div>
-          </div>
-          <div *ngIf="patchId" class="col-12 mb-3 mt-4">
-            <label for="formFile" class="form-label"> File </label>
-            <input
-              class="form-control"
-              type="text"
-              [disabled]="true"
-              [value]="patchData?.folderName"
-            />
-          </div>
+          
 
           <div class="col-12 col-md-6 mb-3">
             <label for="name" class="form-label"
@@ -46,14 +13,14 @@
             <input
               type="text"
               class="form-control"
-              formControlName="batchName"
+              formControlName="categoryName"
               placeholder="Enter Name"
             />
             <!-- Validation Message for Name -->
             <div
               *ngIf="
-                categoryForm.get('batchName')?.invalid &&
-                categoryForm.get('batchName')?.touched
+                categoryForm.get('categoryName')?.invalid &&
+                categoryForm.get('categoryName')?.touched
               "
               class="text-danger"
             >
@@ -63,20 +30,18 @@
 
           <div class="col-12 col-md-6 mb-3">
             <label for="source" class="form-label"
-              >Source <span class="text-danger">*</span></label
+              >Parent Category</label
             >
-           
-
-            <div
-              *ngIf="
-                categoryForm.get('batchSource')?.invalid &&
-                categoryForm.get('batchSource')?.touched
-              "
-              class="text-danger"
-            >
-              Source is required.
-            </div>
-          </div>
+            <p-dropdown
+            [options]="lookUpCategories"
+            [optionValue]="'id'"
+            [optionLabel]="'name'"
+            [placeholder]="'Select Parent'"
+            
+            [showClear]="true"
+          >
+          </p-dropdown>
+    </div>
 
           <div
             class="col-12 my-4 d-flex justify-content-center align-items-center"
@@ -86,7 +51,7 @@
               class="btn btn-primary mx-2"
               (click)="onSubmit()"
             >
-              {{ patchId ? "Save" : "Submit" }}
+              {{ categoryId ? "Save" : "Submit" }}
             </button>
             <button
               [routerLink]="'/admin/categoryList'"
@@ -95,13 +60,7 @@
             >
               Cancel
             </button>
-            <!-- <button
-              (click)="resetForm()"
-              type="button"
-              class="btn btn-warning mx-2"
-            >
-              Reset
-            </button> -->
+            
           </div>
         </div>
       </form>

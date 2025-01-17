@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 let userData = JSON.parse(localStorage.getItem('userData') || '{}');
 const routes: Routes = [
   {
-    path: '',
+    path: 'categoryList',
     loadChildren: () =>
       import('./category-management/category-management.module').then(
         (m) => m.CategoryManagementModule

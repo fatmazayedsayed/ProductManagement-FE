@@ -5,7 +5,9 @@ import { ViewCategoriesComponent } from './view-category-details/view-categories
 import { AddEditCategoryComponent } from './add-edit-category/add-edit-category/add-edit-category.component';
 
 const routes: Routes = [
-  { path: 'categoryList', component: CategoryManagementListComponent },
+  { path: '', 
+    component: CategoryManagementListComponent 
+  },
   {
     path: 'addEditCategory',
     component: AddEditCategoryComponent,

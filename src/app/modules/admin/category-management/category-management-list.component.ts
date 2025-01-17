@@ -48,8 +48,7 @@ export class CategoryManagementListComponent implements OnInit {
 
   actions = ['canEdit', 'canDelete'];
   getAllCategories(event?: any) {
-    debugger;
-    this.pageNumber = event && event.page ? event.page + 1 : 1;
+     this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
 
     this._categorySerive
@@ -61,7 +60,6 @@ export class CategoryManagementListComponent implements OnInit {
         this.currentSorting
       )
       .subscribe((res: any) => {
-        debugger;
         this.categoryData = res.data.records;
         this.totalRecords = res.data.count;
         this.pageNumber = res.pageNumber;

@@ -35,11 +35,15 @@ export class CategoryService {
   }
   
   delete(id: string) {
-    return this.http.delete(`${this.url}${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}DeleteCategory`,  {
+        params:  { CategoryId: id }
+    });
   }
   getById(id: any) {
-    return this.http.get(`${this.url}/${id}`);
-  }
+    return this.http.get(`${this.url}GetCategoryForView`, {
+        params:  { CategoryId: id }
+    });
+}
 
   addcategory(body: any) {
     return this.http.post(`${this.url}upload`, body);
