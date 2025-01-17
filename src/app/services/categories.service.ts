@@ -49,27 +49,12 @@ export class CategoryService {
     });
   }
   
-  
-  
-  
-
   addCategory(body: any) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Specify JSON format
-    });
-  
     // Send the body directly as an object (no FormData)
     return this.http.post(`${this.url}create`, body);
   }
-  
-  
-
-  editcategory(body: any) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Explicitly set the content type
-    });
-
-    return this.http.put(`${this.url}`, body, { headers });
+  editcategory(body: any) { 
+    return this.http.put(`${this.url}update`, body );
   }
   
 
