@@ -86,6 +86,16 @@ export class AddEditCategoryComponent implements OnInit {
     if (this.categoryForm.valid) {
       if(this.categoryId!=this._GuidDefault.getDefaultGUID()) {
         //edit
+        if(this.categoryId ==body.parentCategoryId)
+        {
+          this.messageService.add({
+            key: 'toast2',
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Category cannot be parent of itself',
+          });
+          return;
+        }
         this.categoryService.editcategory(body).subscribe(
           (res: any) => {
             this.setResultMessage(true);
@@ -149,6 +159,12 @@ export class AddEditCategoryComponent implements OnInit {
     this.categoryService.getLookUpCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
+
+       // Prepend the "No Parent" option
+    this.lookUpCategories = [
+      { id: this._GuidDefault.getDefaultGUID(), name: 'No Parent' },
+      ... this.lookUpCategories,
+    ];
     });
   }
 
