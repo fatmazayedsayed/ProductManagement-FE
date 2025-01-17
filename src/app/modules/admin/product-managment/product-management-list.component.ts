@@ -144,7 +144,7 @@ export class ProductManagementListComponent implements OnInit {
     }
   }
   goToEdit(event: any) {
-    this.router.navigate(['/admin/categoryList/addEditCategory'], {
+    this.router.navigate(['/admin/productList/addEditProduct'], {
       queryParams: { id: event.id },
     });
   }
