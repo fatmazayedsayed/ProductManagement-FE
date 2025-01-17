@@ -123,7 +123,7 @@ export class AdminTableComponent implements OnInit, OnChanges {
   currentSortOrder: number = 1;
 
   onSortChange(sortField: any) {
-    if (sortField === 'name' || sortField === 'source') {
+    if (sortField === 'name' || sortField === 'parentCategoryName') {
       if (this.currentSortField === sortField) {
         this.currentSortOrder = this.currentSortOrder * -1;
       } else {

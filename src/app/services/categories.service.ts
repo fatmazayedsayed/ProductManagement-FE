@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CategoryService {
-  url ='http://localhost:5008/api/';
+  url ='http://localhost:5008/api/categories/';
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -35,20 +35,20 @@ export class CategoryService {
   }
   
   delete(id: string) {
-    return this.http.delete(`${this.url}categories/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}${id}`, { responseType: 'text' });
   }
   getById(id: any) {
-    return this.http.get(`${this.url}categories/${id}`);
+    return this.http.get(`${this.url}/${id}`);
   }
 
   addcategory(body: any) {
-    return this.http.post(`${this.url}categories/upload`, body);
+    return this.http.post(`${this.url}upload`, body);
   }
   editcategory(body: any) {
-    return this.http.put(`${this.url}categories/UpdateCategory`, body);
+    return this.http.put(`${this.url}UpdateCategory`, body);
   }
 
   getLookUpCategories() {
-    return this.http.get(`${this.url}lookUp/getLookUpCategories`);
+    return this.http.get(`${this.url}getLookUpCategories`);
   }
 }

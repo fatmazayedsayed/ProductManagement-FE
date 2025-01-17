@@ -31,8 +31,7 @@ export class CategoryManagementListComponent implements OnInit {
     this.parentCategoryId = this._GuidDefault.getDefaultGUID();
   }
   ngOnInit() {
-    debugger;
-    this.getAllCategories();
+     this.getAllCategories();
     this.getParentCategory();
   }
   headers = [
@@ -42,7 +41,7 @@ export class CategoryManagementListComponent implements OnInit {
     },
     {
       text: ' Category Source',
-      field: 'parentCategoryId',
+      field: 'parentCategoryName',
     },
   ];
   breadcrumbItems = [{ label: 'Category List', route: '/admin/categoryList' }];
@@ -62,8 +61,9 @@ export class CategoryManagementListComponent implements OnInit {
         this.currentSorting
       )
       .subscribe((res: any) => {
-        this.categoryData = res.records;
-        this.totalRecords = res.count;
+        debugger;
+        this.categoryData = res.data.records;
+        this.totalRecords = res.data.count;
         this.pageNumber = res.pageNumber;
         this.pageSize = res.pageSize;
       });
@@ -152,8 +152,7 @@ export class CategoryManagementListComponent implements OnInit {
   }
   getParentCategory() {
     this._categorySerive.getLookUpCategories().subscribe((res: any) => {
-      debugger;
-      this.lookUpCategories = res;
+      this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
        
     });
