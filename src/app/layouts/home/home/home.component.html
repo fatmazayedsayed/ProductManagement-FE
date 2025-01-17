@@ -1,26 +1,47 @@
 <div class="body">
   <app-user-header></app-user-header>
-  <div class="container">
-    <div class="d-flex flex-column flex-wrap home_wrapper">
-        <div class="text-center mb-5">
-          <!-- <h1 class="text-primary">Welcome to the Home Page</h1> -->
-          <h1 class="lead">Explore our features</h1>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-md-3 mb-4">
-            <div class="card card-hover">
-              <div class="card-body text-center d-flex">
-                
-                <!-- <h5 class="card-title">Search</h5>
-                <p class="card-text">Start searching.</p> -->
-                <a [routerLink]="'/user/search'" class="btn btn-primary d-flex align-items-center home_btn">
-                  Search
-                  <i class="fas fa-search fa-5x mx-3"></i>
-                  </a
-                >
+  <div class="container py-5">
+    <div class="home_wrapper">
+      <div class="text-center mb-5">
+        <h1 class="lead">System Dashboard</h1>
+      </div>
+      <div class="dashboard card shadow p-4">
+        <h2 class="mb-4 text-center">Dashboard Overview</h2>
+
+        <div class="row mb-4">
+          <div class="col-6 text-center">
+            <div class="card border-primary shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Total Products</h5>
+                <p class="display-6">{{ dashboardData.totalProducts }}</p>
               </div>
             </div>
           </div>
+          <div class="col-6 text-center">
+            <div class="card border-success shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title text-success">Total Categories</h5>
+                <p class="display-6">{{ dashboardData.totalCategories }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="mt-4 text-center">Products Per Category</h3>
+        <table class="table table-striped table-bordered mt-3">
+          <thead class="table-dark">
+            <tr>
+              <th>Category Name</th>
+              <th>Product Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of dashboardData.productsPerCategory">
+              <td>{{ category.categoryName }}</td>
+              <td>{{ category.productCount }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

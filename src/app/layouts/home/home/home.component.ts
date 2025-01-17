@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DashBoardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   userData: any;
-  constructor(private router: Router) {}
+  dashboardData: any;
+  constructor(private router: Router,
+        private _dasboard: DashBoardService,
+    
+  ) {}
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
-  }
+    this._dasboard.getDashBoardData().subscribe((response: any) => {
+      this.dashboardData=(response.data)
+     })}
 
   onLogout() {
     localStorage.removeItem('userData');
