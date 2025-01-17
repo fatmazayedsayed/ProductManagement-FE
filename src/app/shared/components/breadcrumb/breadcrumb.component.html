@@ -1,0 +1,24 @@
+<section class="page_title my-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 d-flex align-items-center bread_crump_list">
+          <a [routerLink]="'/home'" class="sub_title mx-2 ">
+            <i class="pi pi-home"></i> <!-- Home icon -->
+          </a>
+          <i class="fa fa-arrow-right mx-1 mt-2"></i> 
+          
+          <ng-container *ngFor="let item of items; let last = last">
+
+            <a *ngIf="item.route; else staticLink" [routerLink]="item.route" class="sub_title mx-2">
+              {{ item.label }}
+            </a>
+            <ng-template #staticLink>
+              <span class="current_page mx-2">{{ item.label }}</span>
+            </ng-template>
+            <i *ngIf="!last" class="fa fa-arrow-right mx-1 mt-2"></i>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </section>
+  

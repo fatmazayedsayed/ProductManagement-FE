@@ -1,0 +1,109 @@
+.home_wrapper{
+  height: 75vh;
+  justify-content: center;
+}
+.btn:first-child:active{
+  background-color: #0085db;
+  border-color : #0085db;
+}
+h3 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+.text-primary {
+  color: #0085db !important;
+  font-size: 28px;
+}
+
+.btn-primary {
+  background-color: #0085db;
+  border-color: #0085db;
+}
+
+.card-hover {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: solid 1px #0085db57;
+  background-color: #0085db0f;
+}
+.fa-comments {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  color: #fff;
+}
+.fa-search {
+  rotate: 90deg;
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  color: #fff;
+}
+.home_btn{
+  width: 180px;
+  position: relative;
+}
+.card-hover:hover {
+  box-shadow: 0 0 15px rgba(0, 133, 219, 0.5);
+  transform: translateY(-5px);
+}
+
+.admin-icon,
+.logout-icon {
+  text-decoration: none;
+}
+
+.admin-icon:hover,
+.logout-icon:hover {
+  color: #0056b3;
+}
+
+.card-body {
+  padding: 30px;
+}
+
+h5.card-title {
+  color: #0085db;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-hover {
+    height: auto;
+  }
+}
+
+.card-text {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.lead {
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #0085db;
+  display: inline;
+  padding: 10px;
+  border-radius: 10px;
+  // box-shadow: 0 0 15px rgba(0, 133, 219, 0.5);
+  font-size: 30px;
+  position: relative;
+}
+.lead::after {
+  content : '';
+  background-color: #0085db;
+  width: 80%;
+  height: 2px;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}

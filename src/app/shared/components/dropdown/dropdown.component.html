@@ -1,0 +1,19 @@
+<div class="">
+  <label style="text-align: start; width: 100%;" for="">{{
+    label
+  }}</label>
+  <p-multiSelect
+    [options]="options"
+    [placeholder]="placeHolder"
+    [optionValue]="optionValue"
+    [optionLabel]="optionLabel"
+    [disabled]="disabled"
+    variant="filled"
+    [showClear]="isShowClear"
+    [maxSelectedLabels]="8"
+    [displaySelectedLabel]="true"
+    [(ngModel)]="value"
+    (onChange)="onSelectionChange($event)"
+    (onClear)="onClear()"
+  />
+</div>

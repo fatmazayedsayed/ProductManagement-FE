@@ -1,0 +1,45 @@
+.page_title {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6; /* Light border */
+}
+.bread_crump_list a:hover {
+  transition: 0.3s all ease-in-out;
+  color: #0085db;
+}
+.bread_crump_list {
+  display: flex;
+  align-items: center;
+}
+.bread_crump_list a {
+  text-decoration: none;
+}
+
+.back_btn {
+  color: black; /* Blue link color */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.current_page {
+  margin: auto;
+}
+
+.sub_title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.current_page {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0085db;
+  margin-left: 10px;
+}
+
+.page_title i {
+  font-size: 1rem;
+}

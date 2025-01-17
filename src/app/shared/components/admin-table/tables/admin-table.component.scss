@@ -1,0 +1,171 @@
+.paraContent {
+  margin-left: 10px;
+}
+
+.search_actions .search_input .input-icon {
+  position: relative; /* Positioning context for the icon */
+}
+
+.search_actions .search_input input {
+  width: 100%;
+  padding: 5px 30px; 
+  font-size: 16px;
+  border-radius: 7px;
+  margin-top: 8px;
+  height: 49px;
+  border: 1px solid #cccccd;
+}
+
+.search_actions .search_input i {
+  position: absolute;
+  right: 10px; 
+  top: 55%; 
+  transform: translateY(-50%); 
+  color: #92929d;
+  z-index: 1;
+  pointer-events: none; 
+}
+
+.center-dialog .p-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.center-dialog .p-dialog-content {
+  margin: auto;
+}
+
+.dialogContetn div {
+  margin: 20px 0;
+  font-size: 18px;
+}
+.dialogContetn div:first-child {
+  margin-top: 45px !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: #e5f3fb;
+}
+::ng-deep {
+  .p-dropdown-items ol,
+  ul {
+    padding-left: 0 !important;
+    margin: 0 !important;
+  }
+  .p-button-rounded {
+    border-radius: 50%;
+    margin-left: 8px;
+  }
+  .p-dialog-footer {
+    text-align: center;
+  }
+  .p-dialog-header .delete-dialog-header {
+    color: white;
+    background: #e43c3c;
+    padding: 15px 100px 15px 20px;
+    border-radius: 2px 31px 32px 0px;
+    margin: 5px 35px 0px 5px;
+    font-weight: 600;
+  }
+  .p-dialog-header > span {
+    font-size: 17px;
+  }
+  .view .p-dialog-header {
+    background: #0085db;
+    border-radius: 0;
+    color: white;
+  }
+  .delete .p-dialog-header {
+    background: white;
+  }
+  .view-dialog-header {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .p-dialog-header::after {
+    content: "";
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .center-dialog .p-dialog-mask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  p-button button {
+    width: 30px;
+    height: 30px;
+  }
+  p-button button > span {
+    font-size: 15px;
+  }
+  .p-dialog-footer .delete-btn button {
+    width: 65px;
+    height: 5vh;
+    font-size: 13px;
+    border-radius: 13px;
+    text-align: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  .p-dialog-footer .delete-btn button > span {
+    font-size: 13px;
+  }
+  .action_btn button {
+    width: 30px;
+    height: 30px;
+  }
+  .custom-close-icon .p-dialog-header-close {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+}
+
+.p-dialog-title {
+  element.style {
+    background: #e5f3fb;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 10px 30px 10px 10px;
+  }
+
+  .delete-btn .p-button {
+    width: 40px !important;
+  }
+
+  .delete-btn {
+    button {
+      width: 40px; /* Custom width */
+      background-color: #f44336; /* Optional: Custom color */
+      border-radius: 5px; /* Optional: Rounded corners */
+      color: white; /* Change text color */
+      border: none; /* Optional: Remove border */
+    }
+  }
+}
+.paginator {
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb !important;
+}
+::ng-deep {
+  .searchTabel .p-datatable .p-datatable-tbody > tr > td {
+    width: 250px !important;
+    border: 1px solid rgb(241, 240, 240);
+  }
+  .searchTabel .p-datatable .p-datatable-thead > tr > th {
+    border-bottom: #92929d !important;
+    background-color: #e9e9eb !important;
+  }
+}

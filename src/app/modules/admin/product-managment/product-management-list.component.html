@@ -1,0 +1,41 @@
+<app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+
+<div class="d-flex justify-content-end mb-2 addBtn">
+  <button [routerLink]="'/admin/productList/add-Edit-product'">
+    Add New Product <i class="fa-solid fa-plus"></i>
+  </button>
+</div>
+
+<div>
+  <app-admin-table
+    [cols]="headers"
+    [isId]="false"
+    [showCheckboxes]="false"
+    [hasActions]="true"
+    [filter]="false"
+    [isSearch]="false"
+    [isSearchOnly]="true"
+    [actions]="actions"
+    [searchText]="searchString"
+    [placeholderSearch]="'Search..'"
+    [pageSize]="pageSize"
+    [rows]="profileData"
+    [hasSort]="true"
+    [placeholderSearch]="'Search..'"
+    (pageNumber)="filter ? submitFilter($event) : getAllProfiles($event)"
+    [totalRecords]="totalRecords"
+    [hasSort]="true"
+    [dialogView]="false"
+    (deleteConfirmed)="onDelete($event)"
+    (filterOutput)="submitFilter($event)"
+    (onViewClicked)="viewDetails($event)"
+    [hasPaginator]="true"
+    [ViewRoute]="'/admin/productList/view-product'"
+    (editUser)="goToEdit($event)"
+    [sortInAllColumns]="false"
+    (sortChange)="onSortChange($event)"
+  ></app-admin-table>
+</div>
+
+<p-toast key="toast1" styleClass="success"></p-toast>
+<p-toast key="toast2" styleClass="error"></p-toast>

@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+.error .p-toast-message {
+  background-color: #fef3f3;
+  color: #dc2626;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error .p-toast-summary {
+  font-weight: bold;
+  color: #dc2626;
+}
+
+.error .p-toast-detail {
+  font-size: 14px;
+}
+
+.success .p-toast-message {
+  background-color: #f1fdf5;
+  color: #19a44c;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
+
+.success .p-toast-summary {
+  font-weight: bold;
+  color: #19a44c;
+}
+
+.success .p-toast-detail {
+  font-size: 14px;
+}
+.addBtn button {
+  border: 1px solid #0085db;
+  border-radius: 10px;
+  padding: 7px;
+  background: #0085db;
+  color: white;
+  font-weight: 600;
+}
+.addBtn button:hover {
+  background: #299be7;
+  transition: 0.2s ease-in-out;
+}
+.addBtn i {
+  font-size: 14px;
+}
+::ng-deep {
+  .searchTabel .p-datatable .p-datatable-tbody > tr > td {
+    width: 200px !important;
+  }
+
+  .error .p-toast-summary {
+    font-weight: bold;
+    color: #dc2626;
+  }
+
+  .error .p-toast-detail {
+    font-size: 14px;
+  }
+
+  .success .p-toast-message {
+    background-color: #f1fdf5;
+    color: #19a44c;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+  }
+
+  .success .p-toast-summary {
+    font-weight: bold;
+    color: #19a44c;
+  }
+
+  .success .p-toast-detail {
+    font-size: 14px;
+  }
+  .addBtn button {
+    border: 1px solid #0085db;
+    border-radius: 10px;
+    padding: 7px;
+    background: #0085db;
+    color: white;
+    font-weight: 600;
+  }
+  .addBtn button:hover {
+    background: #299be7;
+    transition: 0.2s ease-in-out;
+  }
+  .addBtn i {
+    font-size: 14px;
+  }
+}
+.p-dialog-content {
+  overflow-y: unset !important;
+}

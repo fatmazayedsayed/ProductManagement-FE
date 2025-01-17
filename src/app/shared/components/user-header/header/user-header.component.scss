@@ -1,0 +1,25 @@
+.text-primary {
+  color: #0085db !important;
+  font-size: 28px;
+}
+header {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  overflow: hidden;
+}
+h3 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+.fa-user-shield,
+.fa-sign-out-alt {
+  font-size: 25px !important;
+}
+.admin-icon{
+  transition: .2s all ease-in-out;
+}
+.admin-icon:hover{
+  transform: scale(1.1);
+  transition: .2s all ease-in-out;
+}

@@ -1,0 +1,278 @@
+<div class="">
+  <p-table
+    class="table_style"
+    #dt1
+    [globalFilterFields]="['name', 'source']"
+    [value]="hasLocalPagination ? paginatedTableData : rows"
+    [columns]="cols"
+    [class]="customClass ? customClass : 'w-100' + 'paddingTable'"
+    [(selection)]="selectedElements"
+    (selectionChange)="onSelectionChange($event)"
+  >
+    >
+    <ng-template pTemplate="caption">
+      <div
+        *ngIf="hasFilterAndSearch"
+        class="row d-flex justify-content-between mb-3 search_actions"
+      >
+        <div
+          class="search_input "
+          [ngClass]="{
+            'col-12': !filter && isSearchOnly,
+            'col-6': isSearch
+          }"
+        >
+          <label *ngIf="hasLabel" for="">Search By Name</label>
+          <div class="input-icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input
+              pInputText
+              [(ngModel)]="searchChoice"
+              class="w-100 formControl position-relative"
+              type="text"
+              (keyup.enter)="filterChange(searchChoice)"
+              [placeholder]="placeholderSearch"
+              (change)="filterChange(searchChoice)"
+            />
+          </div>
+         
+        </div>
+        <div class="col-6" *ngIf="filter">
+          <label style="display: block" for="source" class="form-label"
+            >Filter by Parent
+          </label>
+          <p-dropdown
+            [options]="lookUpCategories"
+            [optionValue]="'id'"
+            [optionLabel]="'name'"
+            [placeholder]="'Select Parent'"
+            [(ngModel)]="sourceChoice"
+            (onChange)="filterChange(sourceChoice)"
+            [showClear]="true"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngIf="showCheckboxes">
+          <p-tableHeaderCheckbox (onChange)="onSelectAllChange($event)"></p-tableHeaderCheckbox>
+          <!-- [ngClass]="'hide-check-icon'" -->
+        </th>
+
+        <th *ngIf="isId">ID</th>
+        <th
+          [pSortableColumn]="
+            sortInAllColumns ? col.field : i === 0 ? col.field : null
+          "
+          *ngFor="let col of cols; let i = index"
+          (click)="onSortChange(col.field)"
+        >
+          {{ col.text }}
+          <p-sortIcon
+            *ngIf="hasSort && (sortInAllColumns || i === 0)"
+            [field]="col.field"
+          ></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="action" style="width: 20%" *ngIf="showAction"></th>
+        <th class="text-center" *ngIf="hasActions">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-cols>
+      <tr>
+        <td [attr.colspan]="cols.length + 1">
+          <div class="row text-center d-flex justify-contetn-center">
+            <div class="col">
+              <img
+                src="../../../../../assets/icons/no-data-found.svg"
+                alt="No Data Found"
+              />
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rows let-i="rowIndex">
+      <tr>
+        <td *ngIf="showCheckboxes">
+          <p-tableCheckbox
+            [ngClass]="'hide-check-icon'"
+            [value]="rows"
+            [index]="i"
+            (onChange)="onRowSelect($event)"
+          ></p-tableCheckbox>
+        </td>
+
+        <td *ngIf="isId">{{ rows.id }}</td>
+        <td *ngFor="let col of cols">
+          <ng-container [ngSwitch]="col.field">
+            <ng-template [ngSwitchCase]="'Id'">
+              {{ rows.Id }}
+            </ng-template>
+
+            <ng-template ngSwitchDefault class="text-center">
+              {{ getValue(rows, col.field) }}
+            </ng-template>
+          </ng-container>
+        </td>
+        <td *ngIf="hasActions">
+          <section class="d-flex justify-content-center">
+            <ng-container *ngFor="let action of actions">
+              <ng-container *ngIf="action === 'canEdit'">
+                <div>
+                  <p-button
+                    icon="pi pi-pencil"
+                    class="action_btn"
+                    [rounded]="true"
+                    [outlined]="true"
+                    severity="success"
+                    (click)="editRouteDetails(rows)"
+                  />
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="action === 'canDelete'">
+                <div>
+                  <p-button
+                    icon="pi pi-trash"
+                    severity="danger"
+                    class="action_btn"
+                    [rounded]="true"
+                    [outlined]="true"
+                    (click)="onDelete(rows)"
+                  />
+                </div>
+              </ng-container>
+              <ng-container *ngIf="action === 'canView'">
+                <div class="actions">
+                  <p-button
+                    icon="pi pi-eye"
+                    severity="info"
+                    [rounded]="true"
+                    [outlined]="true"
+                    class="action_btn"
+                    [queryParams]="{ id: rows.id }"
+                    [routerLink]="ViewRoute"
+                    (click)="navigateToDetails(rows)"
+                  />
+                </div>
+              </ng-container>
+            </ng-container>
+          </section>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Dialog inside shared table component -->
+  <p-dialog
+    [(visible)]="displayDialog"
+    [header]="dialogHeader"
+    [ngClass]="
+      dialogAction === 'view'
+        ? ' view center-dialog custom-close-icon'
+        : 'delete center-dialog custom-close-icon'
+    "
+    modal="true"
+    [style]="{ width: '35rem', 'border-radius': '10px' }"
+    [closable]="true"
+  >
+    <ng-template pTemplate="header">
+      <div *ngIf="dialogAction === 'delete'">
+        <div class="delete-dialog-header">
+          <span>Delete Confirmation</span>
+        </div>
+      </div>
+      <div *ngIf="dialogAction !== 'delete'">
+        <div class="view-dialog-header">
+          <span>{{ dialogHeader }}</span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div *ngIf="dialogAction === 'view'; else deleteContent">
+        <div class="formGroup flex align-items-center gap-3 mb-5 p-l-17 mt-5">
+          <ul>
+            <li class="m-4">
+              <span style="font-weight: bold; margin-right: 5px"
+                >Batch Id : </span
+              >{{ selectedId }}
+            </li>
+            <li class="m-4">
+              <span style="font-weight: bold; margin-right: 5px"
+                >Batch Name : </span
+              >{{ selectedName }}
+            </li>
+            <li class="m-4">
+              <span style="font-weight: bold; margin-right: 5px"
+                >Batch Source: </span
+              >{{ selectedSource }}
+            </li>
+            <li class="m-4">
+              <span style="font-weight: bold; margin-right: 5px"
+                >Folder Name: </span
+              >{{ selectedFolder }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <ng-template #deleteContent>
+        <p class="text-center m-t-24">
+          <i class="pi pi-info-circle" style="margin-right: 8px"></i>
+          Are you sure you want to delete <b>{{ selectedName }}</b> ?
+        </p>
+      </ng-template>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div *ngIf="dialogAction === 'view'; else deleteButtons"></div>
+
+      <ng-template #deleteButtons>
+        <p-button
+          [outlined]="!isActive && !isYesHovered"
+          label="Yes"
+          severity="info"
+          (click)="confirmDelete()"
+          (mouseenter)="isYesHovered = true"
+          (mouseleave)="isYesHovered = false"
+          class="p-button- p-button-text delete-btn"
+        >
+        </p-button>
+
+        <p-button
+          [outlined]="!isActive && !isNoHovered"
+          label="No"
+          severity="danger"
+          (click)="closeDialog()"
+          (mouseenter)="isNoHovered = true"
+          (mouseleave)="isNoHovered = false"
+          class="p-button-danger p-button-text delete-btn"
+        ></p-button>
+      </ng-template>
+    </ng-template>
+  </p-dialog>
+
+  <div *ngIf="hasPaginator" class="paginator">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="    {first} - {last}  Of  {totalRecords}"
+      [rows]="pageSize"
+      [first]="page"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="[10, 50, 100]"
+    ></p-paginator>
+  </div>
+  <div *ngIf="hasLocalPagination">
+    <p-paginator
+      (onPageChange)="paginate($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="    {first} - {last}  Of  {totalRecords}"
+      [rows]="pageSize"
+      [first]="page"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>

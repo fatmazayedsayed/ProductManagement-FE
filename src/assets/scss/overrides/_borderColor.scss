@@ -1,0 +1,9 @@
+// theme
+.mat-drawer-side {
+  border-right: 1px solid $borderColor;
+  z-index: 1 !important;
+}
+
+.mat-divider {
+  border-top-color: $borderColor;
+}

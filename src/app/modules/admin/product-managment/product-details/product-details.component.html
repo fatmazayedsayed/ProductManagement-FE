@@ -1,0 +1,28 @@
+<div class="profile-details">
+  <!-- Profile Tree Structure -->
+  <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+
+  <p-tree [value]="profileTree">
+    <ng-template let-node pTemplate="default">
+      <div *ngIf="node.data && node.data.value; else labelTemplate">
+        <label class="font-weight-bold bold-label"> {{ node.label }}</label
+        >:
+        <!-- Static values displayed in tree nodes -->
+        <span class="text-left">{{ node.data.value }}</span>
+      </div>
+      <ng-template #labelTemplate>
+        <label class="label-header m-l-3"
+          >{{ node.label }}
+          <i [class]="node.icon" class="header-icon m-l-4"></i>
+          <!-- Icon displayed after label -->
+        </label>
+      </ng-template>
+    </ng-template>
+  </p-tree>
+
+  <div class="d-flex justify-content-end  addBtn button-container">
+    <button class="back-btn  " [routerLink]="'/admin/profileList'">
+      <i class="fa-solid fa-arrow-left"></i> Back to List
+    </button>
+  </div>
+</div>

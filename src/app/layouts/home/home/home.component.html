@@ -1,0 +1,27 @@
+<div class="body">
+  <app-user-header></app-user-header>
+  <div class="container">
+    <div class="d-flex flex-column flex-wrap home_wrapper">
+        <div class="text-center mb-5">
+          <!-- <h1 class="text-primary">Welcome to the Home Page</h1> -->
+          <h1 class="lead">Explore our features</h1>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-3 mb-4">
+            <div class="card card-hover">
+              <div class="card-body text-center d-flex">
+                
+                <!-- <h5 class="card-title">Search</h5>
+                <p class="card-text">Start searching.</p> -->
+                <a [routerLink]="'/user/search'" class="btn btn-primary d-flex align-items-center home_btn">
+                  Search
+                  <i class="fas fa-search fa-5x mx-3"></i>
+                  </a
+                >
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
