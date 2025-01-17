@@ -58,7 +58,7 @@ export class AdminTableComponent implements OnInit, OnChanges {
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
   @Output() dataDetails: EventEmitter<any> = new EventEmitter();
-  @Output() editUser: EventEmitter<any> = new EventEmitter();
+  @Output() editItem: EventEmitter<any> = new EventEmitter();
   @Output() onDeleteClicked: EventEmitter<any> = new EventEmitter();
   @Output() onDownloadClicked: EventEmitter<any> = new EventEmitter();
   @Output() changePasswordClicked: EventEmitter<any> = new EventEmitter();
@@ -220,7 +220,7 @@ export class AdminTableComponent implements OnInit, OnChanges {
     this.dataDetails.emit(details);
   }
   editRouteDetails(details: any) {
-    this.editUser.emit(details);
+    this.editItem.emit(details);
   }
 
   onDownload(details: any) {
@@ -303,7 +303,7 @@ export class AdminTableComponent implements OnInit, OnChanges {
     this.paginatedTableData = this.rows?.slice(start, end);
   }
   navigateToDetails(row: any): void {
-    this.dialogHeader = 'Batch Details';
+    this.dialogHeader = 'Item Details';
     if (this.dialogView == true) {
       this.displayDialog = true;
       this.dialogAction = 'view';

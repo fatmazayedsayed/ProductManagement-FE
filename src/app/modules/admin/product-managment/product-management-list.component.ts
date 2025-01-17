@@ -46,7 +46,7 @@ export class ProductManagementListComponent implements OnInit {
   ];
   breadcrumbItems = [{ label: 'product List', route: '/admin/productList' }];
 
-  actions = ['canEdit', 'canDelete'];
+  actions = ['canEdit', 'canDelete','canView'];
   getAllProducts(event?: any) {
      this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
@@ -148,6 +148,13 @@ export class ProductManagementListComponent implements OnInit {
       queryParams: { id: event.id },
     });
   }
+
+  viewDetails(event: any) {
+    this.router.navigate(['/admin/productList/viewProduct'], {
+      queryParams: { id: event.id },
+    });
+  }
+ 
   getParentCategory() {
     this._categorySerive.getLookUpCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;

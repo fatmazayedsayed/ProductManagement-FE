@@ -15,7 +15,7 @@
     [pageSize]="pageSize"
     [filter]="true"
     [actions]="actions"
-    [dialogView]="true"
+    [dialogView]="false"
     [hasSort]="true"
     [placeholderSearch]="'Search..'"
     [rows]="categoryData"
@@ -25,9 +25,11 @@
     [isSearch]="true"
     (deleteConfirmed)="onDelete($event)"
     (filterOutput)="submitFilter($event)"
-    (editUser)="goToEdit($event)"
+    (editItem)="goToEdit($event)"
+    (onViewClicked)="viewDetails($event)"
     [hasPaginator]="true"
     (sortChange)="onSortChange($event)"
+    [ViewRoute]="'/admin/categoryList/view-category'"
 
     [lookUpCategories]="lookUpCategories"
   ></app-admin-table>

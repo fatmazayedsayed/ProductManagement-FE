@@ -15,7 +15,7 @@
     [pageSize]="pageSize"
     [filter]="true"
     [actions]="actions"
-    [dialogView]="true"
+    [dialogView]="false"
     [hasSort]="true"
     [placeholderSearch]="'Search..'"
     [rows]="productData"
@@ -25,7 +25,10 @@
     [isSearch]="true"
     (deleteConfirmed)="onDelete($event)"
     (filterOutput)="submitFilter($event)"
-    (editUser)="goToEdit($event)"
+    (editItem)="goToEdit($event)"
+    (onViewClicked)="viewDetails($event)"
+    [ViewRoute]="'/admin/productList/view-products'"
+
     [hasPaginator]="true"
     (sortChange)="onSortChange($event)"
 

@@ -46,7 +46,7 @@ export class CategoryManagementListComponent implements OnInit {
   ];
   breadcrumbItems = [{ label: 'Category List', route: '/admin/categoryList' }];
 
-  actions = ['canEdit', 'canDelete'];
+  actions = ['canEdit', 'canDelete','canView'];
   getAllCategories(event?: any) {
      this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
@@ -148,6 +148,11 @@ export class CategoryManagementListComponent implements OnInit {
       queryParams: { id: event.id },
     });
   }
+  viewDetails(event: any) {
+    this.router.navigate(['/admin/categoryList/viewCategory'], {
+      queryParams: { id: event.id },
+    });
+  } 
   getParentCategory() {
     this._categorySerive.getLookUpParentCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;

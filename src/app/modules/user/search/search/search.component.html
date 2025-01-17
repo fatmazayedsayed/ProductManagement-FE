@@ -2,97 +2,10 @@
   <app-user-header></app-user-header>
   <div class="container">
     <div class="row">
-      <form [formGroup]="searchForm" class="search_form">
-        <h3 class="text-center title">Find the Perfect Match</h3>
-        <div class="form_wrapper">
-          <div class="row justify-content-center mt-3">
-            <div class="col-12 col-md-3">
-              <div class="card dropdown-card text-center p-2">
-                <app-dropdown
-                  [label]="'Job Profile'"
-                  [options]="profileList"
-                  formControlName="profileNames"
-                ></app-dropdown>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-3">
-              <div class="card dropdown-card text-center p-2">
-                <app-dropdown
-                  [label]="'Batch'"
-                  [options]="batchesist"
-                  formControlName="patchNames"
-                ></app-dropdown>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="card dropdown-card text-center p-2">
-                <app-dropdown
-                  [label]="'Skills'"
-                  [options]="skillsList"
-                  formControlName="skills"
-                ></app-dropdown>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="card dropdown-card text-center p-2">
-                <app-dropdown
-                  [label]="'Batch Source'"
-                  [options]="srcsList"
-                  formControlName="patchSources"
-                ></app-dropdown>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-2">
-            <div class="col-12 col-md-3">
-              <div class="card dropdown-card text-center p-2">
-                <app-dropdown
-                  [label]="'Years Of Experience'"
-                  [options]="years"
-                  formControlName="yearsOfExperience"
-                ></app-dropdown>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="row d-flex justify-content-center align-items-center w-100"
-          >
-            <div
-              class="col-12 col-md-4 d-flex justify-content-center align-items-center mb-3 mt-3"
-            >
-              <button (click)="onSubmit()" class="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
+     
     </div>
   </div>
 </div>
-<div class="container mt-2">
-  <div>
-    <h4 class="text-center title">Matched Candidates</h4>
-  </div>
-  <app-admin-table
-    [cols]="headers"
-    [showCheckboxes]="false"
-    [hasPaginator]="true"
-    [rows]="rowsData"
-    [hasSort]="false"
-    [pageSize]="pageSize"
-    (pageNumber)="filter ? submitFilter($event) : onSubmit($event)"
-    [totalRecords]="totalRecords"
-    [customClass]="'searchTabel'"
-    [hasSort]="false"
-    [isSearchOnly]="true"
-    [placeholderSearch]="'Search...'"
-    (filterOutput)="submitFilter($event)"
-    [hasLabel]="true"
-  ></app-admin-table>
-</div>
+ 
 <p-toast key="toast2" styleClass="error"></p-toast>
 <p-toast key="toast1" styleClass="success"></p-toast>

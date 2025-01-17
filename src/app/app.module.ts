@@ -64,7 +64,7 @@ import { HomeModule } from './layouts/home/home/home.module';
     PanelModule,
     InputTextModule,
     ButtonModule,
-    TreeModule,
+    TreeModule, // Add this line
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,

@@ -1,0 +1,39 @@
+<main>
+   <section>
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Product Details</h4>
+        </div>
+        <div class="card-body">
+          <!-- Displaying product details -->
+          <div>
+            <strong>Name:</strong> {{ productTree.name }}
+          </div>
+          <div>
+            <strong>Description:</strong> {{ productTree.description }}
+          </div>
+          <div>
+            <strong>Category:</strong> {{ productTree.categoryName }}
+          </div>
+          <div>
+            <strong>Price:</strong> ${{ productTree.price }}
+          </div>
+          <div>
+            <strong>Status:</strong> {{ productTree.status === 1 ? 'Active' : 'Inactive' }}
+          </div>
+          <div>
+            <strong>Stock Quantity:</strong> {{ productTree.stockQuantity }}
+          </div>
+          <div>
+            <strong>Image URL:</strong> {{ productTree.imageUrl || 'No image available' }}
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+</section>
+</main>

@@ -36,7 +36,7 @@ export class ProductService {
 
   delete(id: string) {
     return this.http.delete(`${this.url}DeleteProduct`, {
-      params: { ProductId: id }
+      params: { itemId: id }
     });
   }
  

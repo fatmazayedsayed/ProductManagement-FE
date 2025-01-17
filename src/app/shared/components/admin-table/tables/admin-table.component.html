@@ -195,26 +195,18 @@
       <div *ngIf="dialogAction === 'view'; else deleteContent">
         <div class="formGroup flex align-items-center gap-3 mb-5 p-l-17 mt-5">
           <ul>
+           
             <li class="m-4">
               <span style="font-weight: bold; margin-right: 5px"
-                >Batch Id : </span
-              >{{ selectedId }}
-            </li>
-            <li class="m-4">
-              <span style="font-weight: bold; margin-right: 5px"
-                >Batch Name : </span
+                > Name : </span
               >{{ selectedName }}
             </li>
             <li class="m-4">
               <span style="font-weight: bold; margin-right: 5px"
-                >Batch Source: </span
+                >Category: </span
               >{{ selectedSource }}
             </li>
-            <li class="m-4">
-              <span style="font-weight: bold; margin-right: 5px"
-                >Folder Name: </span
-              >{{ selectedFolder }}
-            </li>
+           
           </ul>
         </div>
       </div>

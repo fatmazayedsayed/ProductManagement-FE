@@ -1,0 +1,35 @@
+.bold-label {
+  font-weight: bold;
+}
+
+::ng-deep {
+  .label-header {
+    padding: 5px 10px 5px 14px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #4699da;
+    background-color: rgb(229, 243, 251);
+  }
+  .p-treenode-content span .fa-solid,
+  .fas ,.p-treenode-icon{
+    width: 25px;
+    text-align: center;
+  }
+}
+
+.label-header i {
+  display: none !important;
+}
+.profile-details {
+  border-radius: 8px;
+  position: relative; 
+  min-height: 400px; 
+}
+
+.back-btn{
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    justify-content: flex-end;
+}

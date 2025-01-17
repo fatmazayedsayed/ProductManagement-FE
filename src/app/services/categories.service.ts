@@ -36,7 +36,7 @@ export class CategoryService {
 
   delete(id: string) {
     return this.http.delete(`${this.url}DeleteCategory`, {
-      params: { CategoryId: id }
+      params: { itemId: id }
     });
   }
  

@@ -1,5 +1,5 @@
 {
-  "name": "CVRanking",
+  "name": "Product Mangement",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -30,7 +30,7 @@
     "ngx-scrollbar": "^14.1.0",
     "ngx-ui-loader": "^13.0.0",
     "primeicons": "^7.0.0",
-    "primeng": "^17.18.10",
+    "primeng": "^17.18.15",
     "rxjs": "~7.8.1",
     "sse.js": "^2.5.0",
     "tslib": "^2.6.2",
