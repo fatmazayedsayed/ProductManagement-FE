@@ -25,8 +25,7 @@ export class TokenInterceptor implements HttpInterceptor {
       console.error('Error parsing userData from localStorage', e);
       return throwError(e);
     }
-
-    const token = userData?.token;
+     const token = userData?.data?.token;
 
     if (token) {
       request = request.clone({
