@@ -25,8 +25,8 @@ export class CategoryService {
       `${this.url}GetCategory`, {
       params: {
         parentCategoryId: parentCategoryId,
-        pageNumber: pageNumber.toString(),
-        pageSize: pageSize.toString(),
+        pageNumber: pageNumber,
+        pageSize: pageSize,
         searchString: search || ' ',
         Sorting: sort || '',
       }
@@ -39,11 +39,19 @@ export class CategoryService {
       params: { CategoryId: id }
     });
   }
-  getById(id: any) {
-    return this.http.get(`${this.url}GetCategoryForView`, {
-      params: { CategoryId: id }
+ 
+  getById(id: string) {
+    return this.http.get(
+      `${this.url}GetCategoryForView`, {
+      params: {
+        itemId: id,
+      }
     });
   }
+  
+  
+  
+  
 
   addCategory(body: any) {
     const headers = new HttpHeaders({
