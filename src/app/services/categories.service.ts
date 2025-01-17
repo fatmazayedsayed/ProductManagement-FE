@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CategoryService {
-  url ='http://localhost:5008/api/categories/';
+  url = 'http://localhost:5008/api/categories/';
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: 'Bearer',
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(
     pageNumber: number,
@@ -23,34 +23,47 @@ export class CategoryService {
   ) {
     return this.http.get(
       `${this.url}GetCategory`, {
-        params: {
-          parentCategoryId: parentCategoryId ,
-          pageNumber: pageNumber.toString(),
-          pageSize: pageSize.toString(),
-          searchString: search || ' ',
-          Sorting: sort || '',
-        }
+      params: {
+        parentCategoryId: parentCategoryId,
+        pageNumber: pageNumber.toString(),
+        pageSize: pageSize.toString(),
+        searchString: search || ' ',
+        Sorting: sort || '',
       }
+    }
     );
   }
-  
+
   delete(id: string) {
-    return this.http.delete(`${this.url}DeleteCategory`,  {
-        params:  { CategoryId: id }
+    return this.http.delete(`${this.url}DeleteCategory`, {
+      params: { CategoryId: id }
     });
   }
   getById(id: any) {
     return this.http.get(`${this.url}GetCategoryForView`, {
-        params:  { CategoryId: id }
+      params: { CategoryId: id }
     });
-}
+  }
 
-  addcategory(body: any) {
-    return this.http.post(`${this.url}upload`, body);
+  addCategory(body: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Specify JSON format
+    });
+  
+    // Send the body directly as an object (no FormData)
+    return this.http.post(`${this.url}create`, body);
   }
+  
+  
+
   editcategory(body: any) {
-    return this.http.put(`${this.url}UpdateCategory`, body);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Explicitly set the content type
+    });
+
+    return this.http.put(`${this.url}`, body, { headers });
   }
+  
 
   getLookUpCategories() {
     return this.http.get(`${this.url}getLookUpCategories`);
