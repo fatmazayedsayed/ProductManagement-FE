@@ -1,0 +1,97 @@
+<main>
+  <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+  <section>
+    <div class="container-fluid bg-white">
+      <form [formGroup]="productForm" class="w-100" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+          <div class="col-12 col-md-6 mb-3">
+            <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="productName" placeholder="Enter Name" />
+            <!-- Validation Message for Name -->
+            <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="text-danger">
+              Name is required.
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+            <label for="category" class="form-label">Category</label>
+            <p-dropdown
+              [options]="lookUpCategories"
+              [optionValue]="'id'"
+              [optionLabel]="'name'"
+              [placeholder]="'Select Category'"
+              formControlName="categoryId"
+              [showClear]="true"
+            ></p-dropdown>
+            <!-- Validation Message for Category -->
+            <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
+              Category is required.
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" formControlName="description" rows="4" placeholder="Enter Description"></textarea>
+            <!-- Validation Message for Description -->
+            <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+            <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="price" placeholder="Enter Price" />
+            <!-- Validation Message for Price -->
+            <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+              Price is required.
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+            <p-dropdown
+            [options]="statusOptions"
+            [optionValue]="'value'"
+            [optionLabel]="'label'"
+            formControlName="status"
+            [placeholder]="'Select Status'"
+            [showClear]="true"
+          ></p-dropdown>
+            <!-- Validation Message for Status -->
+            <div *ngIf="productForm.get('status')?.invalid && productForm.get('status')?.touched" class="text-danger">
+              Status is required.
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+            <label for="stockQuantity" class="form-label">Stock Quantity <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="stockQuantity" placeholder="Enter Stock Quantity" />
+            <!-- Validation Message for Stock Quantity -->
+            <div *ngIf="productForm.get('stockQuantity')?.invalid && productForm.get('stockQuantity')?.touched" class="text-danger">
+              Stock Quantity is required.
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input type="text" class="form-control" formControlName="imageUrl" placeholder="Enter Image URL" />
+          </div>
+
+          <div class="col-12 my-4 d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary mx-2">
+              {{ productId ? "Save" : "Submit" }}
+            </button>
+            <button [routerLink]="'/admin/productList'" type="button" class="btn btn-danger mx-2">
+              Cancel
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<p-toast key="toast1" styleClass="success"></p-toast>
+<p-toast key="toast2" styleClass="error"></p-toast>

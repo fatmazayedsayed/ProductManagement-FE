@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { CategoryService } from 'src/app/services/categories.service';
-import { GuidDefault } from 'src/app/shared/GuidDefault';
+import { GuidDefault } from 'src/app/shared/helpers/GuidDefault';
 
 @Component({
   selector: 'app-category-management-list',
@@ -149,7 +149,7 @@ export class CategoryManagementListComponent implements OnInit {
     });
   }
   getParentCategory() {
-    this._categorySerive.getLookUpCategories().subscribe((res: any) => {
+    this._categorySerive.getLookUpParentCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
        

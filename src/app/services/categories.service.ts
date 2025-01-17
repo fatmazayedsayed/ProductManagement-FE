@@ -61,4 +61,7 @@ export class CategoryService {
   getLookUpCategories() {
     return this.http.get(`${this.url}getLookUpCategories`);
   }
+  getLookUpParentCategories() {
+    return this.http.get(`${this.url}getLookUpParentCategories`);
+  }
 }

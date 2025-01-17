@@ -1,112 +1,120 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { CategoryService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/products.service';
+import { GuidDefault } from 'src/app/shared/helpers/GuidDefault';
 
 @Component({
   selector: 'app-product-management-list',
   templateUrl: './product-management-list.component.html',
-  styleUrl: './product-management-list.component.scss',
-  providers: [MessageService],
+   providers: [MessageService],
 })
 export class ProductManagementListComponent implements OnInit {
   pageNumber: number = 1;
   pageSize: number = 10;
   filter: boolean = false;
   searchString: string = ' ';
-  profileData: any;
+  productData: any;
   totalRecords: number = 0;
-  displayDialog: boolean = false;
-  actions = ['canEdit', 'canView', 'canDelete'];
+  displayDialog: boolean = false; // Added for dialog visibility
   deleteId: string = '';
-
+  categoryId: string = '';
+  lookUpCategories: any[] = [];
+  currentSorting: string = 'asc';
   constructor(
+    private _productSerive: ProductService,
+    private _categorySerive: CategoryService,
+    private _GuidDefault: GuidDefault,
     private messageService: MessageService,
-    private _profileService: ProductService,
     private router: Router
-  ) {}
-  breadcrumbItems = [{ label: 'Profiles List' }];
+  ) {
+    this.categoryId = this._GuidDefault.getDefaultGUID();
+  }
+  ngOnInit() {
+     this.getAllProducts();
+   }
   headers = [
     {
-      text: 'Profile Name',
+      text: 'product Name',
       field: 'name',
     },
     {
-      text: ' Number of Questions',
-      field: 'numberOfQuestions',
-    },
-    {
-      text: 'Number of Outputs',
-      field: 'numberOfOutputs',
+      text: ' Category',
+      field: 'categoryName',
     },
   ];
+  breadcrumbItems = [{ label: 'product List', route: '/admin/productList' }];
 
-  ngOnInit(): void {
-    this.getAllProfiles();
-  }
-  submitFilter(event: any) {
-    this.pageNumber = event && event.page ? event.page + 1 : 1;
+  actions = ['canEdit', 'canDelete'];
+  getAllProducts(event?: any) {
+     this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
-    this.searchString = event.search ? event.search : ' ';
-    this._profileService
+
+    this._productSerive
       .getAll(
         this.pageNumber,
         this.pageSize,
         this.searchString,
+        this.categoryId,
         this.currentSorting
       )
       .subscribe((res: any) => {
-        this.profileData = res.profiles;
-        this.totalRecords = res.totalCount;
+        this.productData = res.data.records;
+        this.totalRecords = res.data.count;
+        this.pageNumber = res.pageNumber;
+        this.pageSize = res.pageSize;
       });
   }
-  getAllProfiles(event?: any) {
-    this.pageNumber = event && event.page ? event.page + 1 : 1;
-    this.pageSize = event && event.rows ? event.rows : 10;
-
-    this._profileService
-      .getAll(
-        this.pageNumber,
-        this.pageSize,
-        this.searchString,
-        this.currentSorting
-      )
-      .subscribe((res: any) => {
-        this.profileData = Array.isArray(res.profiles) ? res.profiles : [];
-        this.totalRecords = res.totalCount;
-      });
-  }
-  currentSorting: string = 'asc';
-  sortOrder: number = 1;
-
   onSortChange(event: any) {
+    console.log(event);
+
     if (event.sortOrder === 1) {
       this.currentSorting = 'asc';
     } else if (event.sortOrder === -1) {
       this.currentSorting = `${event.sortField}_descending`;
     }
-    this.getAllProfiles();
+    this.getAllProducts();
   }
 
+  submitFilter(event: any) {
+    this.filter = true;
+    this.pageNumber = event.page ? event.page + 1 : 1;
+    this.pageSize = event?.rows ? event?.rows : 10;
+    this.searchString = event.search ? event.search : ' ';
+    this.categoryId = event.parentCategoryId ? event.categoryId : this._GuidDefault.getDefaultGUID();
+
+    this._productSerive
+      .getAll(
+        this.pageNumber,
+        this.pageSize,
+        this.searchString,
+        this.categoryId,
+        this.currentSorting
+      )
+      .subscribe((res: any) => {
+        this.productData = res.records;
+        this.totalRecords = res.count;
+        this.pageNumber = res.pageNumber;
+        this.pageSize = res.pageSize;
+      });
+  }
   onDelete(event: any) {
-    this.deleteBatch(event);
-  }
-  test(e: any) {
-    console.log(e);
+    this.deleteproduct(event);
   }
 
-  deleteBatch(e: any) {
+  deleteproduct(e: any) {
     this.deleteId = e;
     if (this.deleteId) {
-      this._profileService.delete(this.deleteId).subscribe(
+      this._productSerive.delete(this.deleteId).subscribe(
         (response) => {
-          this.getAllProfiles({
+          this.getAllProducts({
             page: this.pageNumber - 1,
             rows: this.pageSize,
             searchString: this.searchString,
           });
 
-          if (response === 'product successfully marked as deleted.') {
+          if (response === 'Success Deleted') {
             this.messageService.add({
               key: 'toast1',
               severity: 'success',
@@ -129,16 +137,22 @@ export class ProductManagementListComponent implements OnInit {
             key: 'toast2',
             severity: 'error',
             summary: 'Error',
-            detail: error.message || 'Failed to delete the batch',
+            detail: error.message || 'Failed to delete the Category',
           });
         }
       );
     }
   }
-  viewDetails(event: any) {}
   goToEdit(event: any) {
-    this.router.navigate(['/admin/productList/add-Edit-product'], {
+    this.router.navigate(['/admin/categoryList/addEditCategory'], {
       queryParams: { id: event.id },
+    });
+  }
+  getParentCategory() {
+    this._categorySerive.getLookUpCategories().subscribe((res: any) => {
+      this.lookUpCategories = res.data;
+      this.lookUpCategories.pop();
+       
     });
   }
 }

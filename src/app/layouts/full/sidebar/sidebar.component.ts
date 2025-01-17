@@ -25,6 +25,11 @@ export class SidebarComponent implements OnInit {
           iconName: 'list',
           route: '/admin/categoryList',
         },
+        {
+          displayName: 'Product',
+          iconName: 'list',
+          route: '/admin/productList',
+        },
       ];
     }
   }

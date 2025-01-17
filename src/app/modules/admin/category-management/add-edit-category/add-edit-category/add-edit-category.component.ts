@@ -11,7 +11,7 @@ import { ControlingFormsService } from 'src/app/services/controling-forms.servic
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import _default from 'primeng/public_api';
-import { GuidDefault } from 'src/app/shared/GuidDefault';
+import { GuidDefault } from 'src/app/shared/helpers/GuidDefault';
 
 @Component({
   selector: 'app-add-edit-category',
@@ -156,7 +156,7 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   getLookUpCategories() {
-    this.categoryService.getLookUpCategories().subscribe((res: any) => {
+    this.categoryService.getLookUpParentCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
 

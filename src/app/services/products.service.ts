@@ -5,36 +5,60 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductService {
-  url =
-    'https://gbg-dev-cvrankingapi-f7a2b3gtfvcag3a0.uksouth-01.azurewebsites.net/api/';
+  url = 'http://localhost:5008/api/Products/';
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: 'Bearer',
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getAll(pageNumber: number, pageSize: any, search: String, sorting: string) {
+  getAll(
+    pageNumber: number,
+    pageSize: number,
+    search: string,
+    categoryId: string,
+    sort?: string
+  ) {
     return this.http.get(
-      `${this.url}product/GetProfileList?PageNumber=${pageNumber}&PageSize=${pageSize}&SearchString=${search}&Sorting=${sorting}`
+      `${this.url}GetProduct`, {
+      params: {
+        categoryId: categoryId,
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        searchString: search || ' ',
+        Sorting: sort || '',
+      }
+    }
     );
   }
+
   delete(id: string) {
-    return this.http.delete(`${this.url}product/${id}`, {
-      responseType: 'text',
+    return this.http.delete(`${this.url}DeleteProduct`, {
+      params: { ProductId: id }
     });
   }
-
-  addProfile(body: any) {
-    return this.http.post(`${this.url}product/AddProfile`, body);
+ 
+  getById(id: string) {
+    return this.http.get(
+      `${this.url}GetProductForView`, {
+      params: {
+        itemId: id,
+      }
+    });
   }
-
-  editProfile(body: any) {
-    return this.http.put(`${this.url}product/update`, body);
+  
+  addProduct(body: any) {
+    // Send the body directly as an object (no FormData)
+    return this.http.post(`${this.url}create`, body);
   }
+  editProduct(body: any) { 
+    return this.http.put(`${this.url}update`, body );
+  }
+  
 
-  getProfileById(id: string) {
-    return this.http.get(`${this.url}product/${id}`);
+  getLookUpCategories() {
+    return this.http.get(`${this.url}getLookUpCategories`);
   }
 }
