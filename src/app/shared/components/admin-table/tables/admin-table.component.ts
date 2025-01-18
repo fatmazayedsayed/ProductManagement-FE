@@ -201,8 +201,8 @@ export class AdminTableComponent implements OnInit, OnChanges {
     if (this.searchChoice) {
       this.body.search = this.searchChoice ? this.searchChoice : null;
     } else {
-      this.body.search = null;
-      this.body.search = ' ';
+      this.body.selectedId = data;
+       
 
     }
     this.filterOutput.emit(this.body);

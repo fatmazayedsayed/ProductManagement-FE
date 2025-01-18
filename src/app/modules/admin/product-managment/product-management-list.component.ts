@@ -8,7 +8,7 @@ import { GuidDefault } from 'src/app/shared/helpers/GuidDefault';
 @Component({
   selector: 'app-product-management-list',
   templateUrl: './product-management-list.component.html',
-   providers: [MessageService],
+  providers: [MessageService],
 })
 export class ProductManagementListComponent implements OnInit {
   pageNumber: number = 1;
@@ -32,8 +32,9 @@ export class ProductManagementListComponent implements OnInit {
     this.categoryId = this._GuidDefault.getDefaultGUID();
   }
   ngOnInit() {
-     this.getAllProducts();
-   }
+    this.getAllProducts();
+    this.getCategoryList();
+  }
   headers = [
     {
       text: 'product Name',
@@ -46,9 +47,9 @@ export class ProductManagementListComponent implements OnInit {
   ];
   breadcrumbItems = [{ label: 'product List', route: '/admin/productList' }];
 
-  actions = ['canEdit', 'canDelete','canView'];
+  actions = ['canEdit', 'canDelete', 'canView'];
   getAllProducts(event?: any) {
-     this.pageNumber = event && event.page ? event.page + 1 : 1;
+    this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
 
     this._productSerive
@@ -82,7 +83,7 @@ export class ProductManagementListComponent implements OnInit {
     this.pageNumber = event.page ? event.page + 1 : 1;
     this.pageSize = event?.rows ? event?.rows : 10;
     this.searchString = event.search ? event.search : ' ';
-    this.categoryId = event.parentCategoryId ? event.categoryId : this._GuidDefault.getDefaultGUID();
+    this.categoryId = event.selectedId ? event.selectedId : this._GuidDefault.getDefaultGUID();
 
     this._productSerive
       .getAll(
@@ -93,6 +94,7 @@ export class ProductManagementListComponent implements OnInit {
         this.currentSorting
       )
       .subscribe((res: any) => {
+        res = res.data;
         this.productData = res.records;
         this.totalRecords = res.count;
         this.pageNumber = res.pageNumber;
@@ -154,12 +156,17 @@ export class ProductManagementListComponent implements OnInit {
       queryParams: { id: event.id },
     });
   }
- 
-  getParentCategory() {
+
+  getCategoryList() {
     this._categorySerive.getLookUpCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
-       
+      this.lookUpCategories =
+        [
+          { id: this._GuidDefault.getDefaultGUID(), name: 'No Parent' },
+          ... this.lookUpCategories,
+        ];
+
     });
   }
 }

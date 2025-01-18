@@ -31,7 +31,7 @@ export class CategoryManagementListComponent implements OnInit {
     this.parentCategoryId = this._GuidDefault.getDefaultGUID();
   }
   ngOnInit() {
-     this.getAllCategories();
+    this.getAllCategories();
     this.getParentCategory();
   }
   headers = [
@@ -46,9 +46,9 @@ export class CategoryManagementListComponent implements OnInit {
   ];
   breadcrumbItems = [{ label: 'Category List', route: '/admin/categoryList' }];
 
-  actions = ['canEdit', 'canDelete','canView'];
+  actions = ['canEdit', 'canDelete', 'canView'];
   getAllCategories(event?: any) {
-     this.pageNumber = event && event.page ? event.page + 1 : 1;
+    this.pageNumber = event && event.page ? event.page + 1 : 1;
     this.pageSize = event && event.rows ? event.rows : 10;
 
     this._categorySerive
@@ -82,7 +82,7 @@ export class CategoryManagementListComponent implements OnInit {
     this.pageNumber = event.page ? event.page + 1 : 1;
     this.pageSize = event?.rows ? event?.rows : 10;
     this.searchString = event.search ? event.search : ' ';
-    this.parentCategoryId = event.parentCategoryId ? event.parentCategoryId : this._GuidDefault.getDefaultGUID();
+    this.parentCategoryId = event.selectedId ? event.selectedId : this._GuidDefault.getDefaultGUID();
 
     this._categorySerive
       .getAll(
@@ -93,6 +93,7 @@ export class CategoryManagementListComponent implements OnInit {
         this.currentSorting
       )
       .subscribe((res: any) => {
+        res = res.data;
         this.categoryData = res.records;
         this.totalRecords = res.count;
         this.pageNumber = res.pageNumber;
@@ -152,12 +153,17 @@ export class CategoryManagementListComponent implements OnInit {
     this.router.navigate(['/admin/categoryList/viewCategory'], {
       queryParams: { id: event.id },
     });
-  } 
+  }
   getParentCategory() {
     this._categorySerive.getLookUpParentCategories().subscribe((res: any) => {
       this.lookUpCategories = res.data;
       this.lookUpCategories.pop();
-       
+      this.lookUpCategories =
+       [
+        { id: this._GuidDefault.getDefaultGUID(), name: 'No Parent' },
+        ... this.lookUpCategories,
+      ];
+      
     });
   }
 }
